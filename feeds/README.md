@@ -2,6 +2,8 @@
 
 This script requires a URL passed as an argument.  Also requires category string passed as argument.
 
+The output is meant to be formatted for use with Newsboat RSS/Atom Reader.
+
 ```bash
 $ pipenv run python feed_scraper.py https://blog.feedspot.com/science_rss_feeds/ test
 
