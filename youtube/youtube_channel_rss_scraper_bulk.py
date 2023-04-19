@@ -36,23 +36,29 @@ def get_rss_link(channel_url):
     else:
         return None
 
-# Get the base URL from the command line arguments
+# Get the base URL and string from the command line arguments
 if len(sys.argv) > 1:
     base_url = sys.argv[1]
 else:
-    print("Usage: python script.py <base_url>")
+    print("Usage: python script.py <base_url> <string>")
     sys.exit(1)
 
-# Open a file to write the output to
-with open('output.txt', 'w') as file:
-    # Call the function to scrape the YouTube links
-    matched_links = scrape_youtube_links(base_url)
+string = ""
+if len(sys.argv) > 2:
+    string = sys.argv[2]
+else:
+    print("Usage: python script.py <base_url> <string>")
+    sys.exit(1)
 
-    # Loop over the URLs that match the base URL and call the get_rss_link function on each one
-    for link in matched_links:
-        rss_link = get_rss_link(link)
-        if rss_link:
-            modified_line = rss_link.strip() + ' ! "univ"'
-            print(modified_line, file=file)
-        else:
-            pass
+# Call the function to scrape the YouTube links
+matched_links = scrape_youtube_links(base_url)
+if not matched_links:
+    print("No feed links found on the page.")
+# Loop over the URLs that match the base URL and call the get_rss_link function on each one
+for link in matched_links:
+    rss_link = get_rss_link(link)
+    if rss_link:
+        modified_line = rss_link.strip() + ' ! "' + string + '"'
+        print(modified_line)
+    else:
+        pass

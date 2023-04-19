@@ -23,7 +23,7 @@ def get_rss_link(base_url):
 if len(sys.argv) > 1:
     base_url = sys.argv[1]
 else:
-    print("Usage: python script.py <base_url>")
+    print("Usage: python script.py <youtube_channel_url>")
     sys.exit(1)
 
 rss_link = get_rss_link(base_url)
